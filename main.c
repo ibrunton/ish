@@ -18,12 +18,20 @@
 
 /*#include "builtins.h"*/
 
-int execute (char** args) {
+/* Launches external programs
+ */
+int ish_launch (char** args) {
+}
+
+/* If command is a built-in, do that.
+ * Otherwise, call ish_launch
+ */
+int ish_execute (char** args) {
 }
 
 #define ISH_TOKEN_BUFFSIZE 64
 #define ISH_TOKEN_DELIM " \t\r\n\a"
-char** tokenise (char* line) {
+char** ish_tokenise (char* line) {
 	int buffsize = ISH_TOKEN_BUFFSIZE, position = 0;
 	char** tokens = malloc (buffsize * sizeof (char*));
 	char* token;
@@ -55,7 +63,7 @@ char** tokenise (char* line) {
 }
 
 #define ISH_RL_BUFFER_SIZE 1024
-char* read_line () {
+char* ish_read_line () {
 	int buffsize = ISH_RL_BUFFER_SIZE;
 	int position = 0;
 	char* buffer = malloc (sizeof (char) * buffsize);
@@ -97,10 +105,10 @@ void loop () {
 
 	do {
 		printf ("> ");
-		line = read_line ();
+		line = ish_read_line ();
 		printf ("%s\n", line);
-		args = tokenise (line);
-		status = execute (args);
+		args = ish_tokenise (line);
+		status = ish_execute (args);
 		free (line);
 		free (args);
 	} while (status);
