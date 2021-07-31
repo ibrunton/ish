@@ -36,3 +36,8 @@ int ish_cd (char **args) {
 int ish_exit (char **args) {
 	return 0;
 }
+
+int ish_version (char **args) {
+	printf ("%s %s\n", APPNAME, VERSION);
+	return 1;
+}

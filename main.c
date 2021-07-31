@@ -25,12 +25,14 @@
  */
 char *builtin_str[] = {
 	"cd",
-	"exit"
+	"exit",
+	"version"
 };
 
 int (*builtin_func[]) (char **) = {
 	&ish_cd,
-	&ish_exit
+	&ish_exit,
+	&ish_version,
 };
 
 int ish_num_builtins () {
