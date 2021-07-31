@@ -2,25 +2,21 @@
 # 2021-07-27 19:21
 # by Ian D Brunton <iandbrunton at gmail dot com>
 
-APPNAME=ish
-VERSION=0.1a
-CC=gcc
+APPNAME = ish
+VERSION = 0.1a
+CC = gcc
 
-CFLAGS = -c -g -Wall -DVERSION=\"$(VERSION)\" -DAPPNAME=\"$(APPNAME)\"
+CFLAGS = -DVERSION=\"$(VERSION)\" -DAPPNAME=\"$(APPNAME)\" -I.
 
-HFILES = builtins.h
-CFILES = main.c builtins.c
+SRCS = main.c builtins.c
+OBJS = $(SRCS:.c=.o)
+DEPS = builtins.h
 
-SRCS = $(HFILES) $(CFILES)
-OBJS = $(CFILES:.c=.o)
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-all: $(APPNAME)
-
-$(APPNAME): 
-	$(CC) $(LDFLAGS) -Wl,--start-group $(OBJS) -Wl,--end-group -o $@
-
-.c.o:
-	$(CC) $(CFLAGS) $< -o $@
+$(APPNAME): $(OBJS)
+	$(CC) -o $@ $^ $(CFLAGS)
 
 clean:
 	rm -rf *.o $(APPNAME)
