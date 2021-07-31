@@ -15,8 +15,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
-/*#include "builtins.h"*/
+#include "builtins.h"
+/*
+ * List of builtin commands
+ * Followed by their functions
+ */
+char *builtin_str[] = {
+	"cd",
+	"exit"
+};
+
+int (*builtin_func[]) (char **) = {
+	&ish_cd,
+	&ish_exit
+};
+
+int ish_num_builtins () {
+	return sizeof (builtin_str) / sizeof (char *);
+}
 
 /* Launches external programs
  */
@@ -45,10 +64,23 @@ int ish_launch (char** args) {
 	return 1;
 }
 
-/* If command is a built-in, do that.
- * Otherwise, call ish_launch
+/* If command is a built-in, do it.
+ * Otherwise, call ish_launch for external programs.
  */
 int ish_execute (char** args) {
+	int i;
+
+	if (args[0] == NULL) { /* an empty command was entered */
+		return 1;
+	}
+
+	for (i = 0; i < ish_num_builtins (); i++) {
+		if (strcmp (args[0], builtin_str[i]) == 0) {
+			return (*builtin_func[i])(args);
+		}
+	}
+
+	return ish_launch (args);
 }
 
 #define ISH_TOKEN_BUFFSIZE 64
@@ -128,7 +160,6 @@ void loop () {
 	do {
 		printf ("> ");
 		line = ish_read_line ();
-		printf ("%s\n", line);
 		args = ish_tokenise (line);
 		status = ish_execute (args);
 		free (line);

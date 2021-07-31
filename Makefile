@@ -6,18 +6,18 @@ APPNAME=ish
 VERSION=0.1a
 CC=gcc
 
-#HFILES = builtins.h
-HFILES =
-CFILES = main.c
+CFLAGS = -c -g -Wall -DVERSION=\"$(VERSION)\" -DAPPNAME=\"$(APPNAME)\"
+
+HFILES = builtins.h
+CFILES = main.c builtins.c
 
 SRCS = $(HFILES) $(CFILES)
 OBJS = $(CFILES:.c=.o)
 
 all: $(APPNAME)
 
-$(APPNAME): #$(OBJS)
-	$(CC) $(CFLAGS) $(CFILES) -o $(APPNAME)
-	#$(CC) $(LDFLAGS) -Wl,--start-group $(OBJS) -Wl,--end-group -o $@
+$(APPNAME): 
+	$(CC) $(LDFLAGS) -Wl,--start-group $(OBJS) -Wl,--end-group -o $@
 
 .c.o:
 	$(CC) $(CFLAGS) $< -o $@
