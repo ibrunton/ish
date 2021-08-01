@@ -5,5 +5,11 @@ This is an exercise in learning more C, intended as a project that can be extend
 
 The name is derived prosaically from "**[i]**an's **[sh]**ell".
 
+### Desired Features
+* Pipes
+* Aliases
+* Auto-completion
+* ...
+
 ### Licensing
 **ish** is released under GPL 3.0, on the off-chance somebody actually finds it interesting enough to use.
