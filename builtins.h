@@ -16,8 +16,7 @@
 #define BUILTINS_H
 
 /*
- * List of builtin commands
- * Followed by their functions
+ * builtin function declarations
  */
 
 int ish_cd (char **args);

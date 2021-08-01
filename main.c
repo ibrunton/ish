@@ -154,7 +154,7 @@ char* ish_read_line () {
 	}
 }
 
-void loop () {
+int main (int argc, char *argv[]) {
 	char* line;
 	char** args;
 	int status = 1;
@@ -167,9 +167,6 @@ void loop () {
 		free (line);
 		free (args);
 	} while (status);
-}
 
-int main (int argc, char *argv[]) {
-	loop ();
 	return EXIT_SUCCESS;
 }
