@@ -21,6 +21,7 @@
 
 int ish_cd (char **args);
 int ish_exit (char **args);
+int ish_history (char **args);
 int ish_version (char **args);
 
 

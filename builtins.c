@@ -20,6 +20,10 @@
  * Built-in function implementations
  */
 
+int ish_alias (char **args) {
+	return 1;
+}
+
 int ish_cd (char **args) {
 	if (args[1] == NULL) {
 		fprintf (stderr, "ish: expected argument to `cd'\n");
@@ -36,6 +40,10 @@ int ish_cd (char **args) {
 int ish_exit (char **args) {
 	return 0;
 }
+
+int ish_history (char **args) {
+	return 1;
+};
 
 int ish_version (char **args) {
 	printf ("%s %s\n", APPNAME, VERSION);
