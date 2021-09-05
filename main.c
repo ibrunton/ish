@@ -24,12 +24,14 @@
  * Followed by their functions
  */
 char *builtin_str[] = {
+	"alias",
 	"cd",
 	"exit",
 	"version"
 };
 
 int (*builtin_func[]) (char **) = {
+	&ish_alias,
 	&ish_cd,
 	&ish_exit,
 	&ish_version,
