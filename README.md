@@ -9,6 +9,7 @@ The name is derived prosaically from "[i]an's [sh]ell".
 * Pipes
 * Aliases
 * Auto-completion
+* Wildcards/pattern-matching
 * Simple command history logging
 
 ### Licensing
